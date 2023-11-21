@@ -8,7 +8,7 @@ import { AuthGuard } from '@nestjs/passport';
 import { Request } from 'express';
 import { DeleteAccountDto } from './dto/delete-account.dto';
 
-@Controller('auth')
+@Controller()
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 

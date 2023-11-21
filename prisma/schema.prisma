@@ -11,10 +11,30 @@ datasource db {
 }
 
 model User {
-  id        Int      @id @default(autoincrement())
-  username  String   @db.VarChar(65)
-  email     String   @unique @db.VarChar(255)
-  password  String   @db.VarChar(255)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id        Int       @id @default(autoincrement())
+  username  String    @db.VarChar(65)
+  email     String    @unique @db.VarChar(255)
+  password  String    @db.VarChar(255)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  posts     Post[]    @relation()
+  comments  Comment[] @relation()
+}
+
+model Post {
+  id       Int       @id @default(autoincrement())
+  title    String    @db.VarChar(255)
+  body     String
+  user     User      @relation(fields: [userId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  userId   Int
+  comments Comment[] @relation()
+}
+
+model Comment {
+  id      Int    @id @default(autoincrement())
+  contenu String @db.VarChar(255)
+  postId  Int
+  userId  Int
+  post    Post   @relation(fields: [postId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  user    User   @relation(fields: [userId], references: [id], onUpdate: Cascade, onDelete: Cascade)
 }
