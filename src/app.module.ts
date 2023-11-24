@@ -4,6 +4,8 @@ import { PrismaModule } from './prisma/prisma.module';
 import { ConfigModule } from '@nestjs/config';
 import { MailerModule } from './mailer/mailer.module';
 import { UserModule } from './user/user.module';
+import { PostModule } from './post/post.module';
+import { CommentModule } from './comment/comment.module';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -13,6 +15,8 @@ import { UserModule } from './user/user.module';
     PrismaModule,
     MailerModule,
     UserModule,
+    PostModule,
+    CommentModule,
   ],
 })
 export class AppModule {}

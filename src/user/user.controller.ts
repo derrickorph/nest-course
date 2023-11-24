@@ -1,15 +1,16 @@
 import { AuthGuard } from '@nestjs/passport';
 import { UserService } from './user.service';
 import { Controller, Get, UseGuards } from '@nestjs/common';
-import { User } from '@prisma/client';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Utilisateurs')
 @Controller('users')
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
   // @UseGuards(AuthGuard('jwt'))
   @Get()
-  async getAllUsers(): Promise<User[]> {
+  async getAllUsers() {
     return await this.userService.getAllUsers();
   }
 }
